@@ -6,6 +6,7 @@ requires-python = ">=3.14"
 members = [
     "code",
     "schema",
+    "services",
 ]
 
 [[package]]
@@ -359,6 +360,11 @@ wheels = [
 name = "schema"
 version = "0.1.0"
 source = { editable = "schema" }
+
+[[package]]
+name = "services"
+version = "0.1.0"
+source = { editable = "services" }
 
 [[package]]
 name = "sniffio"

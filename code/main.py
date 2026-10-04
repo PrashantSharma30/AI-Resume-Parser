@@ -8,6 +8,8 @@ from schema.JobSchema import JobD
 from schema.ResumeSchema import Resume
 from schema.ResumeSchema import MatchResult
 
+from services.helper import read_pdf, read_docx
+
 
 load_dotenv()
 my_api_key=os.getenv("GROQ_API_KEY")
@@ -202,32 +204,6 @@ def parse_resume(resume_text):
     data = json.loads(raw_output)
     resume = Resume(**data)
     return resume
-
-
-from pypdf import PdfReader
-from docx import Document
-def read_pdf(file_path):
-    reader = PdfReader(file_path)
-    text = ""
-    for page in reader.pages:
-        page_text = page.extract_text()
-        if page_text:
-            text += page_text + "\n"
-    return text
-
-def read_docx(file_path):
-    document = Document(file_path)
-    text = ""
-    for paragraph in document.paragraphs:
-        if paragraph.text.strip():
-            text += paragraph.text + "\n"
-    
-    for table in document.tables:
-        for row in table.rows:
-            for cell in row.cells:
-                if cell.text.strip():
-                    text += cell.text + "\n"
-    return text
 
 
 def read_resume(file_path):
